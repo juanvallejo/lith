@@ -3,8 +3,9 @@ syntax = "proto3";
 package streamingserver;
 
 import "google/api/annotations.proto";
-import "google/protobuf/descriptor.proto";
 import "google/protobuf/empty.proto";
+
+import "api/protos/labels.proto";
 
 // StreamingServerService defines the service that manages distributed clients
 // for a given multiplexed audio channel stream.
@@ -17,20 +18,6 @@ service StreamingServerService {
         };
     };
 
-}
-
-// SerializedDataOptions contains useful options for annotating fields
-// that contain marshaled protobuf data, such as unique message IDs.
-message SerializedDataOptions {
-    // is_serialized_id denotes that the annotated field is a serialized /
-    // marshaled resource ID.
-    optional bool is_serialized_id = 1;
-}
-
-extend google.protobuf.FieldOptions {
-    // serialized_data extends field options with useful annotations for fields
-    // containing marshaled id information.
-    optional SerializedDataOptions serialized_data = 1000;
 }
 
 // ViewID contains the ID structure used to uniquely identify a "view" resource.
@@ -52,7 +39,7 @@ message ViewID {
 message ViewRequestType {
     // view_id is a marshaled proto containing unique identifyable information
     // for the current view being rendered by the client.
-    ViewID view_id = 1 [ (serialized_data).is_serialized_id = true ];
+    ViewID view_id = 1 [ (labels.serialized_data).is_serialized_id = true ];
 }
 
 // GetRequest defines a request for any supported resource type that a client

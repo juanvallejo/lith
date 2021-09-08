@@ -4,8 +4,8 @@
 
 #include <grpcpp/grpcpp.h>
 
-#include "api/protos/server.grpc.pb.h"
-#include "api/protos/server.pb.h"
+#include "api/protos/service.grpc.pb.h"
+#include "api/protos/service.pb.h"
 #include "absl/strings/str_join.h"
 
 using grpc::Server;

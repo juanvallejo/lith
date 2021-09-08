@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package labels;
+
+import "google/protobuf/descriptor.proto";
+
+// SerializedDataOptions contains useful options for annotating fields
+// that contain marshaled protobuf data, such as unique message IDs.
+message SerializedDataOptions {
+    // is_serialized_id denotes that the annotated field is a serialized /
+    // marshaled resource ID.
+    optional bool is_serialized_id = 1;
+}
+
+extend google.protobuf.FieldOptions {
+    // serialized_data extends field options with useful annotations for fields
+    // containing marshaled id information.
+    optional SerializedDataOptions serialized_data = 1000;
+}
