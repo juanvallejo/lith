@@ -9,12 +9,21 @@ proto_library(
 )
 
 proto_library(
-    name = "service_proto",
-    srcs = ["service.proto"],
+    name = "req_type_view_proto",
+    srcs = ["req_type_view.proto"],
     deps = [
         ":labels_proto",
         "@googleapi//google/api:annotations_proto",
         "@com_google_protobuf//:empty_proto",
+    ],
+)
+
+proto_library(
+    name = "service_proto",
+    srcs = ["service.proto"],
+    deps = [
+        ":req_type_view_proto",
+        "@googleapi//google/api:annotations_proto",
     ],
 )
 

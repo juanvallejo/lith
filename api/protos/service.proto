@@ -3,9 +3,8 @@ syntax = "proto3";
 package streamingserver;
 
 import "google/api/annotations.proto";
-import "google/protobuf/empty.proto";
 
-import "api/protos/labels.proto";
+import "api/protos/req_type_view.proto";
 
 // StreamingServerService defines the service that manages distributed clients
 // for a given multiplexed audio channel stream.
@@ -18,28 +17,6 @@ service StreamingServerService {
         };
     };
 
-}
-
-// ViewID contains the ID structure used to uniquely identify a "view" resource.
-message ViewID {
-    // view_name is a friendly name given to a "UI view" rendered by a client.
-    string view_name = 1;
-
-    oneof service {
-        // com_sound_mixer represents the service type supported by this server
-        // that manages distributed devices for a given multiplexed audio
-        // channel stream.
-        google.protobuf.Empty com_sound_mixer = 2;
-    }
-    
-}
-
-// ViewRequestType defines a "page view" request type that a visual client can
-// use to display information.
-message ViewRequestType {
-    // view_id is a marshaled proto containing unique identifyable information
-    // for the current view being rendered by the client.
-    ViewID view_id = 1 [ (labels.serialized_data).is_serialized_id = true ];
 }
 
 // GetRequest defines a request for any supported resource type that a client
