@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package streamingserver;
+
+import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/empty.proto";
+
+// StreamingServerService defines the service that manages distributed clients
+// for a given multiplexed audio channel stream.
+service StreamingServerService {
+    // Get represents the single endpoint used by any client type to obtain
+    // any resource stored by or managed in the server.
+    rpc Get(GetRequest) returns (GetResponse) {
+        option (google.api.http) = {
+            get: "/v1/get"
+        };
+    };
+
+}
+
+// SerializedDataOptions contains useful options for annotating fields
+// that contain marshaled protobuf data, such as unique message IDs.
+message SerializedDataOptions {
+    // is_serialized_id denotes that the annotated field is a serialized /
+    // marshaled resource ID.
+    optional bool is_serialized_id = 1;
+}
+
+extend google.protobuf.FieldOptions {
+    // serialized_data extends field options with useful annotations for fields
+    // containing marshaled id information.
+    optional SerializedDataOptions serialized_data = 1000;
+}
+
+// ViewID contains the ID structure used to uniquely identify a "view" resource.
+message ViewID {
+    // view_name is a friendly name given to a "UI view" rendered by a client.
+    string view_name = 1;
+
+    oneof service {
+        // com_sound_mixer represents the service type supported by this server
+        // that manages distributed devices for a given multiplexed audio
+        // channel stream.
+        google.protobuf.Empty com_sound_mixer = 2;
+    }
+    
+}
+
+// ViewRequestType defines a "page view" request type that a visual client can
+// use to display information.
+message ViewRequestType {
+    // view_id is a marshaled proto containing unique identifyable information
+    // for the current view being rendered by the client.
+    ViewID view_id = 1 [ (serialized_data).is_serialized_id = true ];
+}
+
+// GetRequest defines a request for any supported resource type that a client
+// may fetch from the server.
+message GetRequest {
+    oneof req_type {
+        // view_request returns visual data used by a client to render info
+        ViewRequestType view_request = 1;
+    }
+}
+
+// GetResponse defines a supported resource requested by a client.
+// It may be one of (though not limited to) the following: (view,
+// sound_group_membership, sound_group_info).
+message GetResponse {
+    
+}
