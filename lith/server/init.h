@@ -22,7 +22,7 @@ namespace lith {
 
 static bool _lith_service_started = false;
 
-static int Init() {
+static int Init(absl::string_view address, absl::string_view port) {
     if (_lith_service_started) {
         LOG(ERROR) << "Multiple instances of the Lith service cannot be "
                       "initialized";
@@ -32,8 +32,6 @@ static int Init() {
     _lith_service_started = true;
     LOG(ERROR) << "Attempting to initialize service...";
 
-    std::string address = "0.0.0.0";
-    std::string port = "8000";
     std::string full_addr = absl::StrCat(address, ":", port);
 
     LithServerServiceImpl service;
