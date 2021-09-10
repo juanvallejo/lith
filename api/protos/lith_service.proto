@@ -1,14 +1,14 @@
 syntax = "proto3";
 
-package streamingserver;
+package lith;
 
 import "google/api/annotations.proto";
 
 import "api/protos/req_type_view.proto";
 
-// StreamingServerService defines the service that manages distributed clients
+// LithServerService defines the service that manages distributed clients
 // for a given multiplexed audio channel stream.
-service StreamingServerService {
+service LithServerService {
     // Get represents the single endpoint used by any client type to obtain
     // any resource stored by or managed in the server.
     rpc Get(GetRequest) returns (GetResponse) {

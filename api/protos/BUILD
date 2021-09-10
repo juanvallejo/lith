@@ -19,26 +19,27 @@ proto_library(
 )
 
 proto_library(
-    name = "service_proto",
-    srcs = ["service.proto"],
+    name = "lith_service_proto",
+    srcs = ["lith_service.proto"],
     deps = [
         ":req_type_view_proto",
         "@googleapi//google/api:annotations_proto",
     ],
 )
 
+# public targets
 cc_proto_library(
-    name = "service_cc_proto",
-    deps = [":service_proto"],
+    name = "lith_service_cc_proto",
+    deps = [":lith_service_proto"],
     visibility = ["//visibility:public"],
 );
 
 cc_grpc_library(
-    name = "service_cc_grpc",
-    srcs = [":service_proto"],
+    name = "lith_service_cc_grpc",
+    srcs = [":lith_service_proto"],
     grpc_only = True,
     deps = [
-        ":service_cc_proto",
+        ":lith_service_cc_proto",
         "@com_github_grpc_grpc//:grpc++",
     ],
     visibility = ["//visibility:public"],

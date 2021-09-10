@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package streamingserver;
+package lith;
 
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";

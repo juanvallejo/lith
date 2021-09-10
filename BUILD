@@ -2,8 +2,7 @@ cc_binary(
   name = "main",
   srcs = ["main.cc"],
   deps = [
-    "@com_google_absl//absl/strings",
-    "//api/protos:service_cc_proto",
-    "//api/protos:service_cc_grpc",
+    "@com_github_google_glog//:glog",
+    "//lith/server:server",
   ],
 )
