@@ -1,4 +1,7 @@
 load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
+load("@rules_proto_grpc//js:defs.bzl", "js_grpc_web_library")
+load("@rules_proto_grpc//js:defs.bzl", "js_proto_library")
+
 
 proto_library(
     name = "labels_proto",
@@ -44,3 +47,10 @@ cc_grpc_library(
     ],
     visibility = ["//visibility:public"],
 )
+
+js_proto_library(
+    name = "lith_service_js_proto",
+    deps = [":lith_service_proto"],
+    visibility = ["//visibility:public"],
+)
+
