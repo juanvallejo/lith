@@ -24,13 +24,13 @@ static bool _lith_service_started = false;
 
 static int Init(absl::string_view address, absl::string_view port) {
     if (_lith_service_started) {
-        LOG(ERROR) << "Multiple instances of the Lith service cannot be "
+        LOG(INFO) << "Multiple instances of the Lith service cannot be "
                       "initialized";
         return 1;
     }
 
     _lith_service_started = true;
-    LOG(ERROR) << "Attempting to initialize service...";
+    LOG(INFO) << "Attempting to initialize service...";
 
     std::string full_addr = absl::StrCat(address, ":", port);
 
@@ -42,11 +42,11 @@ static int Init(absl::string_view address, absl::string_view port) {
 
     std::unique_ptr<Server> server(builder.BuildAndStart());
     if (!server.get()) {
-        LOG(ERROR) << "Service initialization error."; 
+        LOG(FATAL) << "Service initialization error."; 
         return 1;
     }
 
-    LOG(ERROR) << "Listening at " << full_addr;
+    LOG(INFO) << "Listening at " << full_addr;
 
     server->Wait();
     return 0;
