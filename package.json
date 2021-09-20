@@ -1,0 +1,33 @@
+{
+  "name": "lith-web",
+  "version": "1.0.0",
+  "description": "Lith web client",
+  "main": "./lith/web-client/src/index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@bazel/bazel": "^2.1.0",
+    "@bazel/buildifier": "^4.2.1",
+    "@bazel/ibazel": "^0.15.10",
+    "google-protobuf": "^3.18.0-rc.2",
+    "grpc-web": "^1.2.1",
+    "grpc-webpack-plugin": "^0.2.78",
+    "protobufjs": "^6.11.2",
+    "serve": "^12.0.0",
+    "webpack": "^5.52.1",
+    "webpack-cli": "^4.8.0",
+    "webpack-proto-loader": "^0.5.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "serve dist"
+  },
+  "keywords": [
+    "Lith",
+    "monorepo",
+    "streaming",
+    "server"
+  ],
+  "author": "juanvallejo",
+  "license": "ISC"
+}

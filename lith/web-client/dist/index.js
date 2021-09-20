@@ -1,0 +1,1 @@
+../../../bazel-bin/web-client/dist/index.js/index.js

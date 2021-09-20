@@ -99,7 +99,7 @@ rules_proto_grpc_repos()
 load("@rules_proto_grpc//js:repositories.bzl", rules_proto_grpc_js_repos = "js_repos")
 rules_proto_grpc_js_repos()
 
-load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install")
+load("@build_bazel_rules_nodejs//:index.bzl", "yarn_install", "node_repositories")
 yarn_install(
     name = "npm",
     package_json = "@rules_proto_grpc//js:requirements/package.json",

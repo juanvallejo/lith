@@ -20,9 +20,12 @@ proto_library(
     ],
 )
 
+# TODO(juanvallejo): attempt to combine all dependent files
 proto_library(
     name = "lith_service_proto",
-    srcs = ["lith_service.proto"],
+    srcs = [
+        "lith_service.proto",
+    ],
     deps = [
         ":req_type_view_proto",
         "@googleapi//google/api:annotations_proto",
@@ -53,3 +56,8 @@ js_proto_library(
     visibility = ["//visibility:public"],
 )
 
+js_grpc_web_library(
+    name = "lith_service_js_grpc",
+    protos = [":lith_service_proto"],
+    visibility = ["//visibility:public"],
+)

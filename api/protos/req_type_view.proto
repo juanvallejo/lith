@@ -5,8 +5,8 @@ package lith;
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 
-// ViewID contains the ID structure used to uniquely identify a "view" resource.
-message ViewID {
+// ViewId contains the ID structure used to uniquely identify a "view" resource.
+message ViewId {
     // view_name is a friendly name given to a "UI view" rendered by a client.
     string view_name = 1;
 
@@ -23,5 +23,5 @@ message ViewID {
 message ViewRequestType {
     // view_id is a marshaled proto containing unique identifyable information
     // for the current view being rendered by the client.
-    ViewID view_id = 1;
+    ViewId view_id = 1;
 }

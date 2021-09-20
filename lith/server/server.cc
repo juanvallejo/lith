@@ -14,7 +14,6 @@ namespace lith {
 
 Status LithServerServiceImpl::Get(
     ServerContext* ctx, const GetRequest* req, GetResponse* res) {
-    std::string prefix("Hello");
         return Status::OK;
 }
 

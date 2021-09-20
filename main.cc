@@ -1,3 +1,5 @@
+#include <glog/logging.h>
+
 #include "lith/server/init.h"
 
 // TODO(juanvallejo): turn into absl flags
