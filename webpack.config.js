@@ -13,10 +13,8 @@ module.exports = {
 	mode: 'development',
 	resolve: {
 		modules: [
-			'./protos-gen',
-			'node_modules',
 			'./bazel-bin/api/protos/lith_service_js_proto_pb',
-			'./bazel-bin/api/protos/lith_service_js_grpc_pb',
+			'node_modules',
 		]
 	},
 };

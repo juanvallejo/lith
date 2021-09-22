@@ -4,7 +4,7 @@ package lith;
 
 import "google/api/annotations.proto";
 
-import "api/protos/req_type_view.proto";
+import "api/protos/request.proto";
 
 // LithServerService defines the service that manages distributed clients
 // for a given multiplexed audio channel stream.
@@ -19,18 +19,3 @@ service LithServerService {
 
 }
 
-// GetRequest defines a request for any supported resource type that a client
-// may fetch from the server.
-message GetRequest {
-    oneof req_type {
-        // view_request returns visual data used by a client to render info
-        ViewRequestType view_request = 1;
-    }
-}
-
-// GetResponse defines a supported resource requested by a client.
-// It may be one of (though not limited to) the following: (view,
-// sound_group_membership, sound_group_info).
-message GetResponse {
-    
-}

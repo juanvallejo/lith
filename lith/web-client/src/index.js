@@ -1,7 +1,7 @@
-import {LithServerServiceClient, GetRequest} 
+import {LithServerServiceClient} 
     from 'api/protos/lith_service_grpc_web_pb.js';
-import {ViewRequestType, ViewId} 
-   from 'api/protos/req_type_view_pb.js';
+import {GetRequest, ViewRequestType, ViewId} 
+   from 'api/protos/request_pb.js';
 
 
 const viewId = new ViewId();
@@ -14,11 +14,15 @@ viewReq.setViewId(viewId);
 const request = new GetRequest();
 request.setViewRequest(viewReq);
 
-console.log('Attempting to send request to server...');
-const client = new LithServerServiceClient("http://localhost:8000");
+const client = new LithServerServiceClient("http://localhost:8080");
 
-client.get(request, {}, function(resp) {
-    console.log('>', resp);
+client.get(request, {}, function(err, response) {
+    if (err) {
+        console.log('ERR', err);
+        return;
+    }
+
+    console.log('server>', response.getMsg());
 });
 
 const enableDevTools = window.__GRPCWEB_DEVTOOLS__ || function() {};

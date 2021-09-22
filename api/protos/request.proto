@@ -5,6 +5,23 @@ package lith;
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 
+// GetRequest defines a request for any supported resource type that a client
+// may fetch from the server.
+message GetRequest {
+    oneof req_type {
+        // view_request returns visual data used by a client to render info
+        ViewRequestType view_request = 1;
+    }
+}
+
+// GetResponse defines a supported resource requested by a client.
+// It may be one of (though not limited to) the following: (view,
+// sound_group_membership, sound_group_info).
+message GetResponse {
+    // msg contains a hello world response.
+    string msg = 1;
+}
+
 // ViewId contains the ID structure used to uniquely identify a "view" resource.
 message ViewId {
     // view_name is a friendly name given to a "UI view" rendered by a client.

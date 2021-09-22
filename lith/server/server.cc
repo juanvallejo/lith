@@ -14,6 +14,7 @@ namespace lith {
 
 Status LithServerServiceImpl::Get(
     ServerContext* ctx, const GetRequest* req, GetResponse* res) {
+        res->set_msg("Hello World");
         return Status::OK;
 }
 

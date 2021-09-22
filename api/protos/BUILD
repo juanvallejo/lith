@@ -1,47 +1,49 @@
 load("@com_github_grpc_grpc//bazel:cc_grpc_library.bzl", "cc_grpc_library")
-load("@rules_proto_grpc//js:defs.bzl", "js_grpc_web_library")
-load("@rules_proto_grpc//js:defs.bzl", "js_proto_library")
+load("@rules_proto_grpc//js:defs.bzl", "js_grpc_web_library", "js_proto_library")
 
-
+# Contains proto definitions for the lith package
 proto_library(
-    name = "labels_proto",
-    srcs = ["labels.proto"],
-    deps = [
-        "@com_google_protobuf//:descriptor_proto",
+    name = "lith_service_proto",
+    srcs = [
+        "request.proto"
     ],
-)
-
-proto_library(
-    name = "req_type_view_proto",
-    srcs = ["req_type_view.proto"],
     deps = [
         "@googleapi//google/api:annotations_proto",
         "@com_google_protobuf//:empty_proto",
     ],
 )
 
-# TODO(juanvallejo): attempt to combine all dependent files
+# Contains proto references exclusive to the GRPC service definition.
 proto_library(
-    name = "lith_service_proto",
+    name = "lith_service_grpc_proto",
     srcs = [
         "lith_service.proto",
     ],
     deps = [
-        ":req_type_view_proto",
+        ":lith_service_proto",
         "@googleapi//google/api:annotations_proto",
     ],
 )
 
-# public targets
+js_proto_library(
+    name = "lith_service_js_proto",
+    deps = [":lith_service_proto"],
+    package_name = "lith_service_js_proto",
+)
+
 cc_proto_library(
     name = "lith_service_cc_proto",
-    deps = [":lith_service_proto"],
+    deps = [
+        ":lith_service_grpc_proto",
+    ],
     visibility = ["//visibility:public"],
-);
+)
+
+# public targets
 
 cc_grpc_library(
     name = "lith_service_cc_grpc",
-    srcs = [":lith_service_proto"],
+    srcs = [":lith_service_grpc_proto"],
     grpc_only = True,
     deps = [
         ":lith_service_cc_proto",
@@ -50,14 +52,10 @@ cc_grpc_library(
     visibility = ["//visibility:public"],
 )
 
-js_proto_library(
-    name = "lith_service_js_proto",
-    deps = [":lith_service_proto"],
-    visibility = ["//visibility:public"],
-)
-
 js_grpc_web_library(
     name = "lith_service_js_grpc",
-    protos = [":lith_service_proto"],
+    deps = [":lith_service_js_proto"],
+    protos = [":lith_service_grpc_proto"],
     visibility = ["//visibility:public"],
+    prefix_path = "../lith_service_js_proto_pb",
 )
